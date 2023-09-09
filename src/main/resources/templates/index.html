@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link th:href="@{/style/style.css}" rel="stylesheet">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<div class="container">
+    <h1 th:text="${titulo}"></h1>
+    <button type="button" class="btn btn-primary" th:text="${tituloButtonAdd}" id="buttonADD"></button>
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th scope="col" th:text="${thName}" class="text-info"></th>
+            <th scope="col" th:text="${thInstructor}" class="text-info"></th>
+            <th scope="col" th:text="${thEmail}" class="text-info"></th>
+            <th scope="col" th:text="${thActions}"></th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="curso : ${cursos}">
+            <td th:text="${curso[0]}"></td>
+            <td th:text="${curso[1]}"></td>
+            <td th:text="${curso[2]}"></td>
+
+            <td>
+                <button type="button" th:class="${0 == 0} ? 'btn btn-primary' : ''" th:text="${tituloButtonUpdate}"></button>
+                <button type="button" th:if="${'F'== 'F'}" class="btn btn-danger" th:text="${tituloButtonDelete}"></button>
+                <button type="button" th:unless="${'F' == 'F'}" class="btn btn-primary" th:text="${tituloButtonDelete}"></button>
+
+            </td>
+        </tr>
+        </tbody>
+
+</div>
+
+
+
+
+
+
+
+
+</table>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+</body>
+</html>
