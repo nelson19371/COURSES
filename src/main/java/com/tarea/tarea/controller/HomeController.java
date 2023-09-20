@@ -20,26 +20,26 @@ public class HomeController {
         model.addAttribute("thInstructor", "Course Instructor");
         model.addAttribute("thEmail", "Course Email");
         model.addAttribute("thActions", "Actions");
-
-
+        model.addAttribute("thImages", "Images");
 
         List<String[]> cursos = Listas();
 
+        // Agrega la ruta de la imagen al modelo
+        String rutaImagen = "/images/imagen.png"; // Ruta relativa
+        model.addAttribute("rutaImagen", rutaImagen);
 
         model.addAttribute("cursos", cursos);
-
 
         return "index"; // Devuelve el nombre de la vista HTML que se mostrará
     }
 
     private List<String[]> Listas() {
         List<String[]> cursos = new ArrayList<>();
-        String [] curso1 = {"test1","t","asdba@gmail.com"};
-        String [] curso2 = {"test1","t2","asd@gmail.com"};
-        String [] curso3 = {"test1","t3","gfg@g.com"};
-        String [] curso4 = {"test1","someone","gfg@dsa.com"};
-        String [] curso5 = {"test1","t5","jsbasics@gfg.com"};
-
+        String[] curso1 = {"test1", "t", "asdba@gmail.com"};
+        String[] curso2 = {"test1", "t2", "asd@gmail.com"};
+        String[] curso3 = {"test1", "t3", "gfg@g.com"};
+        String[] curso4 = {"test1", "someone", "gfg@dsa.com"};
+        String[] curso5 = {"test1", "t5", "jsbasics@gfg.com"};
 
         cursos.add(curso1);
         cursos.add(curso2);
@@ -47,13 +47,7 @@ public class HomeController {
         cursos.add(curso4);
         cursos.add(curso5);
 
-
         return cursos;
     }
-
-
-
-
-
-
 }
+

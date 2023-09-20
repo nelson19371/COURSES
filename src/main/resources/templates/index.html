@@ -20,6 +20,7 @@
             <th scope="col" th:text="${thName}" class="text-info"></th>
             <th scope="col" th:text="${thInstructor}" class="text-info"></th>
             <th scope="col" th:text="${thEmail}" class="text-info"></th>
+            <th scope="col" th:text="${thImages}" class="text-info"></th>
             <th scope="col" th:text="${thActions}"></th>
 
         </tr>
@@ -29,6 +30,7 @@
             <td th:text="${curso[0]}"></td>
             <td th:text="${curso[1]}"></td>
             <td th:text="${curso[2]}"></td>
+            <td><img th:src="${rutaImagen}" alt="Imagen" class="imagenPng"></td>
 
             <td>
                 <button type="button" th:class="${0 == 0} ? 'btn btn-primary' : ''" th:text="${tituloButtonUpdate}"></button>
