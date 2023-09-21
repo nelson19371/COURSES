@@ -1,14 +1,21 @@
 package com.tarea.tarea.controller;
 
+import com.tarea.tarea.Repository.CursoRepository;
+import com.tarea.tarea.model.Cursos;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.config.Task;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 public class HomeController {
+
+    @Autowired
+    private CursoRepository cursoRepository;
 
     @GetMapping("/")
     public String producto(Model model) {
@@ -35,19 +42,37 @@ public class HomeController {
 
     private List<String[]> Listas() {
         List<String[]> cursos = new ArrayList<>();
-        String[] curso1 = {"test1", "t", "asdba@gmail.com"};
-        String[] curso2 = {"test1", "t2", "asd@gmail.com"};
-        String[] curso3 = {"test1", "t3", "gfg@g.com"};
-        String[] curso4 = {"test1", "someone", "gfg@dsa.com"};
-        String[] curso5 = {"test1", "t5", "jsbasics@gfg.com"};
 
-        cursos.add(curso1);
-        cursos.add(curso2);
-        cursos.add(curso3);
-        cursos.add(curso4);
-        cursos.add(curso5);
+        // Obtener los cursos de la base de datos
+        List<Cursos> cursosDesdeBD = getCourses();
+
+        // Recorrer la lista de cursos desde la base de datos y convertirlos en el formato deseado
+        for (Cursos curso : cursosDesdeBD) {
+            String[] cursoData = {curso.getName(), curso.getInstructor(), curso.getEmail()};
+            cursos.add(cursoData);
+        }
 
         return cursos;
+    }
+
+    @GetMapping("/courses")
+    public List<Cursos> getCourses(){
+        return cursoRepository.findAll();
+    }
+    @ResponseBody
+    @PostMapping(value="/saveCourses")
+    public String saveCourses(@RequestBody Cursos cursos){
+
+        cursoRepository.save(cursos);
+        return "Course Saved";
+
+    }
+    @ResponseBody
+    @DeleteMapping(value="/delete/{id}")
+    public String deleteCourse(@PathVariable int id){
+        Cursos deleteCursos = cursoRepository.findById(id).get();
+        cursoRepository.delete(deleteCursos);
+        return "Deleted Course";
     }
 }
 
