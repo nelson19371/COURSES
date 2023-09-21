@@ -34,7 +34,7 @@
 
             <td>
                 <button type="button" th:class="${0 == 0} ? 'btn btn-primary' : ''" th:text="${tituloButtonUpdate}"></button>
-                <button type="button" class="btn btn-danger" th:text="${tituloButtonDelete}" th:onclick="'javascript:deleteCourse(' + ${curso.id} + ');'"></button>
+                <button type="button" th:if="${'F'== 'F'}" class="btn btn-danger" th:text="${tituloButtonDelete}"></button>
                 <button type="button" th:unless="${'F' == 'F'}" class="btn btn-primary" th:text="${tituloButtonDelete}"></button>
 
             </td>
@@ -44,33 +44,7 @@
 
 </table>
 </div>
-<script th:inline="javascript">
 
-    function deleteCourse(courseId) {
-        if (confirm('¿Seguro que deseas eliminar este curso?')) {
-            fetch(`/delete/${courseId}`, {
-                method: 'DELETE',
-            })
-            .then(response => {
-                if (response.ok) {
-                    return response.text();
-                } else {
-                    throw new Error('Error al eliminar el curso');
-                }
-            })
-            .then(data => {
-                // La eliminación se realizó con éxito, puedes actualizar la tabla o realizar otras acciones necesarias aquí
-                alert(data); // Muestra un mensaje de éxito o usa una notificación
-                location.reload(); // Recarga la página para reflejar los cambios en la tabla
-            })
-            .catch(error => {
-                // Maneja errores aquí, muestra un mensaje de error o realiza otras acciones necesarias
-                alert('Error: ' + error.message);
-            });
-        }
-    }
-
-</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
 </html>
